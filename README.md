@@ -44,7 +44,7 @@ pip install -r requirements.txt
 ### 4. Run the app
 
 ```bash
-streamlit run app.py
+streamlit run src/app.py
 ```
 
 ---
@@ -69,9 +69,4 @@ streamlit run app.py
 
 ---
 
-## 📸 Screenshots
-
-*Add screenshots or GIF demos of MergeMate UI here.*
-
----
 
