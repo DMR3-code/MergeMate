@@ -44,7 +44,7 @@ pip install -r requirements.txt
 ### 4. Run the app
 
 ```bash
-streamlit run src/app.py
+streamlit run MergeMate.py
 ```
 
 ---

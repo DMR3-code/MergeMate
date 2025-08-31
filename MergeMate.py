@@ -24,13 +24,13 @@ def read_file_content(file_path: str) -> Tuple[str, bool]:
         # First try to detect encoding
         encoding = detect_encoding(file_path)
 
-        with open(file_path, 'r', encoding=encoding) as file:
+        with open(file_path, encoding=encoding) as file:
             content = file.read()
             return content, True
     except UnicodeDecodeError:
         # Fallback to utf-8 with error handling
         try:
-            with open(file_path, 'r', encoding='utf-8', errors='ignore') as file:
+            with open(file_path, encoding='utf-8', errors='ignore') as file:
                 content = file.read()
                 return content, True
         except:
@@ -61,7 +61,7 @@ def merge_files(file_paths: List[str], separator: str = "\n" + "=" * 80 + "\n") 
     return "".join(merged_content)
 
 
-def save_merged_file(content: str, output_filename: str) -> str:
+def save_merged_file(content: str, output_filename: str) -> str | None:
     """Save merged content to a file and return the file path."""
     output_path = os.path.join(tempfile.gettempdir(), output_filename)
 
@@ -80,7 +80,7 @@ def extract_zip_files(zip_file) -> List[str]:
     file_paths = []
 
     try:
-        with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+        with zipfile.ZipFile(zip_file) as zip_ref:
             zip_ref.extractall(temp_dir)
 
         # Get all files recursively
@@ -113,12 +113,12 @@ def is_text_file(file_path: str) -> bool:
 
 def main():
     st.set_page_config(
-        page_title="File Merger Tool",
+        page_title="MergeMate - File Merger Tool",
         page_icon="📄",
         layout="wide"
     )
 
-    st.title("📄 File Merger Tool")
+    st.title("📄 MergeMate")
     st.markdown("Merge multiple text files into one file with filename headers")
 
     # Create two columns for better layout
@@ -225,14 +225,14 @@ def main():
                         preview_length = min(1000, len(merged_content))
                         st.text_area(
                             "Merged content preview:",
-                            value=merged_content[:preview_length] +
-                                  ("..." if len(merged_content) > preview_length else ""),
+                            value="{0}{1}".format(merged_content[:preview_length],
+                                                  ("..." if len(merged_content) > preview_length else "")),
                             height=200,
                             disabled=True
                         )
 
                         # Download button
-                        with open(output_path, 'r', encoding='utf-8') as f:
+                        with open(output_path, encoding='utf-8') as f:
                             file_content = f.read()
 
                         st.download_button(
