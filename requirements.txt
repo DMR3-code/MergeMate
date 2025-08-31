@@ -1,2 +1,2 @@
-streamlit
-chardet
+streamlit>=1.22.0
+chardet>=5.1.0

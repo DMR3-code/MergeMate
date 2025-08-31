@@ -23,7 +23,7 @@ Supports individual file uploads or entire ZIP archives. Each file is merged wit
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/mergemate.git
+git clone https://github.com/DMR3-code/mergemate.git
 cd mergemate
 ```
 
@@ -68,5 +68,3 @@ streamlit run src/app.py
 * **zipfile & tempfile** – file handling
 
 ---
-
-
